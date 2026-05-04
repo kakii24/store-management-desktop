@@ -8,7 +8,9 @@ import Expenses from './pages/Expenses'
 import Currencies from './pages/Currencies'
 
 function App() {
-  const [activePage, setActivePage] = useState('dashboard')
+  const [activePage, setActivePage] = useState(
+    localStorage.getItem('activePage') || 'dashboard'
+  )
 
   const renderPage = () => {
     switch (activePage) {
@@ -24,7 +26,13 @@ function App() {
 
   return (
     <div className="flex bg-gray-900 min-h-screen">
-      <Sidebar activePage={activePage} setActivePage={setActivePage} />
+      <Sidebar
+        activePage={activePage}
+        setActivePage={(page) => {
+          setActivePage(page)
+          localStorage.setItem('activePage', page)
+        }}
+      />
       <main className="ml-64 flex-1 p-6">
         {renderPage()}
       </main>

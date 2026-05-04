@@ -14,12 +14,15 @@ function createWindow() {
         webPreferences: {
             preload: join(__dirname, 'preload.js'),
             contextIsolation: true,
+            nodeIntegration: false,
+            sandbox: false,
 
         }
     })
 
     //In developement load from vite server 
     win.loadURL('http://localhost:5173')
+    win.webContents.openDevTools()
 }
 
 //when electron is ready create the window
