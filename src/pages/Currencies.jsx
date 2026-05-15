@@ -9,7 +9,7 @@ function Currencies() {
         loadCurrencies()
     }, [])
 
-    const loadCurrencies = async () => {
+    async function loadCurrencies() {
         const data = await window.api.getCurrencies()
         setCurrencies(Array.isArray(data) ? data : [])
     }
