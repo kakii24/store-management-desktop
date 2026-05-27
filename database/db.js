@@ -51,6 +51,8 @@ db.exec(`
         type TEXT,
         currency TEXT,
         amount REAL,
+        rate REAL,
+        total_dzd REAL,
         note TEXT,
         date TEXT DEFAULT (datetime('now'))
         );
@@ -68,5 +70,18 @@ db.exec(`
         date TEXT DEFAULT (datetime('now'))
   );
     `);
+
+// Run defensive migrations to ensure existance of new columns in existing databases
+try {
+    db.exec(`ALTER TABLE currencies ADD COLUMN rate REAL`);
+} catch (e) {
+    // Column might already exist
+}
+try {
+    db.exec(`ALTER TABLE currencies ADD COLUMN total_dzd REAL`);
+} catch (e) {
+    // Column might already exist
+}
+
 export default db;
 

@@ -55,7 +55,7 @@ ipcMain.handle('products:update', (event, product) => {
     const stmt = db.prepare(`
         UPDATE products SET 
             name = @name,
-            category = @vategory, 
+            category = @category, 
             quantity = @quantity,
             buy_price = @buy_price,
             sell_price = @sell_price,
